@@ -1,0 +1,146 @@
+﻿@model FootballStats.Models.TeamStaticticsDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>TeamStatistics</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TeamStatistics.Team)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TeamStatistics.Team.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TeamStatistics.League)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TeamStatistics.League.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TeamStatistics.MatchesPlayed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TeamStatistics.MatchesPlayed)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TeamStatistics.Wins)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TeamStatistics.Wins)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TeamStatistics.Draws)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TeamStatistics.Draws)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TeamStatistics.Losses)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TeamStatistics.Losses)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TeamStatistics.Points)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TeamStatistics.Points)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TeamStatistics.GoalsScored)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TeamStatistics.GoalsScored)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TeamStatistics.GoalsConceded)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TeamStatistics.GoalsConceded)
+        </dd>
+
+ 
+    </dl>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.TeamStatistics.TeamStatID">Edit</a> |
+    </div>
+   @*  <dl class="row">
+        <h5>Matches team in league</h5>
+        @foreach (var item in Model.Matches)
+        {
+            <dt>
+                League:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.League.Name)
+            </dd>
+            <dt>
+                HomeTeam:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.HomeTeam.Name)
+            </dd>
+            <dt>
+                AwayTeam:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.AwayTeam.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => item.MatchRound)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.MatchRound)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => item.MatchDateTime)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.MatchDateTime)
+            </dd>
+        }
+    </dl> *@
+    <h5>Matches for team</h5>
+    <table class="table table-striped table-bordered">
+        <thead style="background-color: #007bff; color: white; font-weight: bold;">
+            <tr>
+                <th>League</th>
+                <th>Match Round</th>
+                <th>Match DateTime</th>
+                <th>Home Team</th>
+                <th>Home Score</th>
+                <th>Away Score</th>
+                <th>Away Team</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Matches)
+            {
+                <tr style="background-color: #f2f2f2;">
+                    <td>@Html.DisplayFor(model => item.League.Name)</td>
+                    <td>@Html.DisplayFor(model => item.MatchRound)</td>
+                    <td>@Html.DisplayFor(model => item.MatchDateTime)</td>
+                    <td>@Html.DisplayFor(model => item.HomeTeam.Name)</td>
+                    <td>@Html.DisplayFor(model => item.HomeTeamScore)</td>
+                    <td>@Html.DisplayFor(model => item.AwayTeamScore)</td>
+                    <td>@Html.DisplayFor(model => item.AwayTeam.Name)</td>
+                    <td><a asp-controller="Matches" asp-action="details" asp-route-id="@item.MatchID">About match</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

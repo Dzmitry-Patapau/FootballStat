@@ -1,0 +1,71 @@
+﻿@using System.Text;
+@model FootballStats.Data.Identity.Team
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Team</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TeamID" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            @{
+                var session = ViewContext.HttpContext.Session;
+                if (session.TryGetValue("logo", out byte[] imagePathBytes))
+                {
+                    var imagePath = Encoding.UTF8.GetString(imagePathBytes);
+                    <img src="@imagePath" alt="Logo" width="50" height="50" />
+                }
+            }
+            <div class="form-group">
+                <label asp-for="Logo" class="control-label">Logo</label>
+                <input asp-for="Logo" name="Logo" type="file" id="Logo" accept="image/*" class="form-control" />
+                <p id="errorLogo" class="text-danger"></p>
+                <span asp-validation-for="Logo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stadium" class="control-label"></label>
+                <input asp-for="Stadium" class="form-control" />
+                <span asp-validation-for="Stadium" class="text-danger"></span>
+            </div>
+            @{
+                session = ViewContext.HttpContext.Session;
+                if (session.TryGetValue("logostadium", out byte[] imagePathBytes2))
+                {
+                    var imagePath = Encoding.UTF8.GetString(imagePathBytes2);
+                    <img src="@imagePath" alt="Stadium Logo" width="200" height="120" />
+                }
+            }
+            <div class="form-group">
+                <label asp-for="LogoStadium" class="control-label">LogoStadium</label>
+                <input asp-for="LogoStadium" name="LogoStadium" type="file" id="LogoStadium" accept="image/*" class="form-control" />
+                <p id="errorLogoStadium" class="text-danger"></p>
+                <span asp-validation-for="LogoStadium" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</br>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script src="/js/imageValidation.js"></script>

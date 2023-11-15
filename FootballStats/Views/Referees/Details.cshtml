@@ -1,0 +1,42 @@
+﻿@using FootballStats.Components;
+@model FootballStats.Models.RefereeDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Referee</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Referee.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Referee.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Referee.Nationality)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Referee.Nationality)
+        </dd>
+    </dl>
+
+
+
+    <h5>Matches for referee</h5>
+
+    <component type="typeof(AllMatch)" render-mode="ServerPrerendered" param-RefereeId="@Model.Referee.RefereeID" />
+    @section Scripts{
+        <script src="_framework/blazor.server.js"></script>
+    }
+
+
+</div>
+<div>
+    <a href="@Context.Request.Headers["Referer"]">Back</a>
+</div>

@@ -1,0 +1,99 @@
+﻿@model FootballStats.Data.Identity.Match
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Match</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MatchID" />
+            <div class="form-group">
+                <label asp-for="LeagueID" class="control-label"></label>
+                <select asp-for="LeagueID" class="form-control" asp-items="ViewBag.LeagueID"></select>
+                <span asp-validation-for="LeagueID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HomeTeamID" class="control-label"></label>
+                <select asp-for="HomeTeamID" class="form-control" asp-items="ViewBag.HomeTeamID"></select>
+                <span asp-validation-for="HomeTeamID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AwayTeamID" class="control-label"></label>
+                <select asp-for="AwayTeamID" class="form-control" asp-items="ViewBag.AwayTeamID"></select>
+                <span asp-validation-for="AwayTeamID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MatchRound" class="control-label"></label>
+                <input asp-for="MatchRound" class="form-control" />
+                <span asp-validation-for="MatchRound" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MatchDateTime" class="control-label"></label>
+                <input asp-for="MatchDateTime" class="form-control" />
+                <span asp-validation-for="MatchDateTime" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="HomeTeamScore" class="form-control" />
+            <input type="hidden" asp-for="AwayTeamScore" class="form-control" />
+            <div class="form-group">
+                <label asp-for="RefereeID" class="control-label"></label>
+                <select asp-for="RefereeID" class="form-control" asp-items="ViewBag.RefereeID"></select>
+                <span asp-validation-for="RefereeID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            var home = $('#HomeTeamID').val();
+            var away = $('#AwayTeamID').val();
+            var league = $('#LeagueID').val();
+            $('#HomeTeamID, #AwayTeamID').empty();
+            $.getJSON('/Matches/GetTeamsByLeague', { leagueId: league }, function (data) {
+                $.each(data, function (index, item) {
+                    $('#HomeTeamID, #AwayTeamID').append($('<option>', {
+                        value: item.value,
+                        text: item.text
+                    })); $('#HomeTeamID').val(home);
+            $('#AwayTeamID').val(away);
+                });
+            });
+           
+            // Слушаем изменения в поле выбора лиги
+            $('#LeagueID').change(function () {
+                var leagueId = $(this).val();
+                if (leagueId) {
+                    // Очищаем и заполняем список команд
+                    $('#HomeTeamID, #AwayTeamID').empty();
+                    $.getJSON('/Matches/GetTeamsByLeague', { leagueId: leagueId }, function (data) {
+                        $.each(data, function (index, item) {
+                            $('#HomeTeamID, #AwayTeamID').append($('<option>', {
+                                value: item.value,
+                                text: item.text
+                            }));
+                        });
+                    });
+                } else {
+                    // Если лига не выбрана, очищаем списки команд
+                    $('#HomeTeamID, #AwayTeamID').empty();
+                }
+            })
+        });
+    </script>
+}

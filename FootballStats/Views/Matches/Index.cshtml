@@ -1,0 +1,163 @@
+﻿@* @model IEnumerable<FootballStats.Data.Identity.Match>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.League)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatchRound)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatchDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomeTeam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AwayTeam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomeTeamScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AwayTeamScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Referee)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                 @Html.DisplayFor(modelItem => item.League.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatchRound)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatchDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomeTeam.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AwayTeam.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomeTeamScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AwayTeamScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Referee.Name)
+            </td>
+
+
+            <td>
+                <a asp-action="AddScore" asp-route-id="@item.MatchID">Score</a> |
+                <a asp-controller="MatchStatistics" asp-action="Edit" asp-route-id="@item.MatchID">Statistics</a> |
+                <a asp-action="Edit" asp-route-id="@item.MatchID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MatchID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MatchID">Delete</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+ *@
+ @model IEnumerable<FootballStats.Data.Identity.Match>
+
+@{
+    ViewData["Title"] = "Индекс";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>All matches</h1>
+
+<p>
+    <a asp-action="Create">Add new match</a>
+</p>
+
+<table class="table table-striped table-bordered">
+    <thead style="background-color: #007bff; color: white; font-weight: bold;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.League)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatchRound)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatchDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomeTeam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AwayTeam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomeTeamScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AwayTeamScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Referee)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr style="background-color: #f2f2f2;">
+                <td>
+                     @Html.DisplayFor(modelItem => item.League.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatchRound)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatchDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HomeTeam.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AwayTeam.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HomeTeamScore)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AwayTeamScore)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Referee.Name)
+                </td>
+                <td>
+                    <a asp-action="AddScore" asp-route-id="@item.MatchID">Score</a> |
+                    <a asp-controller="MatchStatistics" asp-action="Edit" asp-route-id="@item.MatchID">Statistics</a> |
+                    <a asp-action="Edit" asp-route-id="@item.MatchID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.MatchID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MatchID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

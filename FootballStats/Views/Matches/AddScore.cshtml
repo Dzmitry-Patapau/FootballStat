@@ -1,0 +1,120 @@
+﻿@model FootballStats.Data.Identity.Match
+
+@{
+    ViewData["Title"] = "AddScore";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Match score</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Addscore">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MatchID" />
+
+            <div class="form-group">
+                <label asp-for="HomeTeamScore" class="control-label"></label>
+                <input asp-for="HomeTeamScore" class="form-control" required />
+                <span asp-validation-for="HomeTeamScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AwayTeamScore" class="control-label"></label>
+                <input  type="number" asp-for="AwayTeamScore" class="form-control" required />
+                <span asp-validation-for="AwayTeamScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+   @*  <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MatchRound)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MatchRound)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MatchDateTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MatchDateTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HomeTeamScore)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HomeTeamScore)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AwayTeamScore)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AwayTeamScore)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Referee)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Referee.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.League)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.League.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HomeTeam)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HomeTeam.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AwayTeam)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AwayTeam.Name)
+        </dd>
+    </dl> *@
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th class="col-sm-2">@Html.DisplayNameFor(model => model.League)</th>
+            <th class="col-sm-2">@Html.DisplayNameFor(model => model.MatchRound)</th>
+            <th class="col-sm-2">@Html.DisplayNameFor(model => model.MatchDateTime)</th>
+            <th class="col-sm-2">@Html.DisplayNameFor(model => model.HomeTeam)</th>
+            <th class="col-sm-1">@Html.DisplayNameFor(model => model.HomeTeamScore)</th>
+            <th class="col-sm-1">@Html.DisplayNameFor(model => model.AwayTeamScore)</th>
+            <th class="col-sm-2">@Html.DisplayNameFor(model => model.AwayTeam)</th>
+            <th class="col-sm-2">@Html.DisplayNameFor(model => model.Referee)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style ="background-color: #f2f2f2;">
+            <td class="col-sm-2">@Html.DisplayFor(model => model.League.Name)</td>
+            <td class="col-sm-2">@Html.DisplayFor(model => model.MatchRound)</td>
+            <td class="col-sm-2">@Html.DisplayFor(model => model.MatchDateTime)</td>
+            <td class="col-sm-2">@Html.DisplayFor(model => model.HomeTeam.Name)</td>
+            <td class="col-sm-1">@Html.DisplayFor(model => model.HomeTeamScore)</td>
+            <td class="col-sm-1">@Html.DisplayFor(model => model.AwayTeamScore)</td>
+            <td class="col-sm-2">@Html.DisplayFor(model => model.AwayTeam.Name)</td>
+            <td class="col-sm-2">@Html.DisplayFor(model => model.Referee.Name)</td>
+        </tr>
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

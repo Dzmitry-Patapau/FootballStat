@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "TestApi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>TestApi (/api/league/4/Statistics)</h1>
+
+@model List<LeagueStatistics>
+
+<h1>League Statistics</h1>
+
+<table class="table table-striped table-bordered">
+    <thead style="background-color: #007bff; color: white; font-weight: bold;">
+        <tr>
+            <th scope="col">Position</th>
+            <th scope="col">Team</th>
+            <th scope="col">Matches Played</th>
+            <th scope="col">Wins</th>
+            <th scope="col">Draws</th>
+            <th scope="col">Losses</th>
+            <th scope="col">Points</th>
+            <th scope="col">Goals Scored</th>
+            <th scope="col">Goals Conceded</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var (index, team) in Model.Select((item, index) => (index + 1, item)))
+        {
+            <tr>
+                <td>@index</td>
+                <td>@team.TeamName</td>
+                <td>@team.MatchesPlayed</td>
+                <td>@team.Wins</td>
+                <td>@team.Draws</td>
+                <td>@team.Losses</td>
+                <td>@team.Points</td>
+                <td>@team.GoalsScored</td>
+                <td>@team.GoalsConceded</td>
+            </tr>
+        }
+    </tbody>
+</table>

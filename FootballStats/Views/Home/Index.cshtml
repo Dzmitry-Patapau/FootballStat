@@ -1,0 +1,12 @@
+﻿@using FootballStats.Components;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+@(await Html.RenderComponentAsync<AllMatch>(RenderMode.ServerPrerendered))
+
+@section Scripts{
+    <script src="_framework/blazor.server.js"></script>
+} 
